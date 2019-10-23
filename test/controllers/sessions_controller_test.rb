@@ -1,18 +1,10 @@
-class SessionsController < ApplicationController
+  
+require 'test_helper'
 
-  def new
+class SessionsControllerTest < ActionDispatch::IntegrationTest
+  test "should get new" do
+    get login_path
+    assert_response :success
   end
 
-  def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      # ユーザーログイン後にユーザー情報のページにリダイレクトする
-    else
-      flash.now[:danger] = 'Invalid email/password combination'
-      render 'new'
-    end
-  end
-
-  def destroy
-  end
 end
